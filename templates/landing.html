@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block title %}Home - {{ app_name }}{% endblock %}
+
+{% block content %}
+<div class="landing-page">
+    <!-- Hero Section -->
+    <div class="hero-section text-center py-5">
+        <div class="container">
+            <div class="red-accent-bar mb-4"></div>
+            <h1 class="display-4 fw-bold mb-3">TDW Cuts Automation Tool</h1>
+            <p class="lead text-muted mb-4">Generate think-cell-ready analysis cuts in seconds</p>
+            <a href="{{ url_for('upload') }}" class="btn btn-bain btn-lg px-5 py-3">
+                <i class="fas fa-rocket me-2"></i>Get Started
+            </a>
+        </div>
+    </div>
+    
+    <!-- Features Section -->
+    <div class="container py-5">
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="feature-card h-100">
+                    <div class="feature-icon">
+                        <i class="fas fa-upload"></i>
+                    </div>
+                    <h4>1. Upload Data</h4>
+                    <p class="text-muted">Upload your Excel roster file with employee data and classifications.</p>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="feature-card h-100">
+                    <div class="feature-icon">
+                        <i class="fas fa-sliders-h"></i>
+                    </div>
+                    <h4>2. Configure Cuts</h4>
+                    <p class="text-muted">Select your classification column and three demographic dimensions.</p>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="feature-card h-100">
+                    <div class="feature-icon">
+                        <i class="fas fa-download"></i>
+                    </div>
+                    <h4>3. Download Results</h4>
+                    <p class="text-muted">Get your formatted Excel file with all 8 cuts ready for think-cell.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Stats Section -->
+    <div class="bg-light py-5">
+        <div class="container">
+            <div class="row text-center g-4">
+                <div class="col-md-3">
+                    <div class="stat-number">8</div>
+                    <div class="stat-label">Automated Cuts</div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Think-Cell Ready</div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-number">< 1 min</div>
+                    <div class="stat-label">Processing Time</div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-number">0</div>
+                    <div class="stat-label">Manual Errors</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block title %}Upload Data - {{ app_name }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-white">
+                    <h4 class="mb-0">
+                        <i class="fas fa-upload me-2"></i>Upload Your Data
+                    </h4>
+                </div>
+                <div class="card-body p-5">
+                    <form action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data" id="uploadForm">
+                        <div class="upload-area text-center p-5 mb-4" id="dropZone">
+                            <i class="fas fa-cloud-upload-alt fa-3x text-muted mb-3"></i>
+                            <h5>Drag & Drop your Excel file here</h5>
+                            <p class="text-muted">or</p>
+                            <label class="btn btn-outline-secondary">
+                                Browse Files
+                                <input type="file" name="file" accept=".xlsx,.xls" class="d-none" id="fileInput">
+                            </label>
+                            <p class="text-muted small mt-3">Supported formats: .xlsx, .xls (Max 16MB)</p>
+                        </div>
+                        
+                        <div id="fileInfo" class="d-none">
+                            <div class="alert alert-success">
+                                <i class="fas fa-check-circle"></i>
+                                <strong id="fileName"></strong>
+                                <span id="fileSize" class="text-muted ms-2"></span>
+                            </div>
+                        </div>
+                        
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-bain btn-lg" id="uploadBtn" disabled>
+                                <i class="fas fa-arrow-right me-2"></i>Upload & Continue
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const dropZone = document.getElementById('dropZone');
+    const fileInput = document.getElementById('fileInput');
+    const uploadBtn = document.getElementById('uploadBtn');
+    const fileInfo = document.getElementById('fileInfo');
+    const fileName = document.getElementById('fileName');
+    const fileSize = document.getElementById('fileSize');
+    
+    // Drag and drop
+    dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropZone.classList.add('dragover');
+    });
+    
+    dropZone.addEventListener('dragleave', () => {
+        dropZone.classList.remove('dragover');
+    });
+    
+    dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('dragover');
+        const files = e.dataTransfer.files;
+        if (files.length) {
+            fileInput.files = files;
+            handleFile(files[0]);
+        }
+    });
+    
+    // File input change
+    fileInput.addEventListener('change', () => {
+        if (fileInput.files.length) {
+            handleFile(fileInput.files[0]);
+        }
+    });
+    
+    function handleFile(file) {
+        fileName.textContent = file.name;
+        fileSize.textContent = formatFileSize(file.size);
+        fileInfo.classList.remove('d-none');
+        uploadBtn.disabled = false;
+        dropZone.classList.add('has-file');
+    }
+    
+    function formatFileSize(bytes) {
+        if (bytes === 0) return '0 Bytes';
+        const k = 1024;
+        const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+</script>
+{% endblock %}

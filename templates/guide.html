@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}User Guide - {{ app_name }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-white">
+                    <h4 class="mb-0">
+                        <i class="fas fa-book me-2"></i>User Guide
+                    </h4>
+                </div>
+                <div class="card-body p-4">
+                    <div class="guide-section">
+                        <h5><i class="fas fa-info-circle me-2"></i>About</h5>
+                        <p>The TDW Cuts Automation Tool generates 8 standardized analysis cuts from your roster data for think-cell charting. It automatically extracts L1 (Thinker/Doer/Watcher) and L2 classifications from your data.</p>
+                    </div>
+                    
+                    <div class="guide-section">
+                        <h5><i class="fas fa-list-ol me-2"></i>The 8 Cuts</h5>
+                        <ol>
+                            <li><strong>Demographic 1 Summary</strong> — Count by first selected demographic</li>
+                            <li><strong>Demographic 2 Summary</strong> — Count by second selected demographic</li>
+                            <li><strong>Demographic 3 Summary</strong> — Count by third selected demographic</li>
+                            <li><strong>L1 Split</strong> — Thinker/Doer/Watcher totals</li>
+                            <li><strong>L2 vs L1</strong> — Cross-tabulation of L2 categories by L1</li>
+                            <li><strong>L1 vs Demo 1</strong> — Cross-tabulation of L1 by first demographic</li>
+                            <li><strong>L1 vs Demo 2</strong> — Cross-tabulation of L1 by second demographic</li>
+                            <li><strong>L1 vs Demo 3</strong> — Cross-tabulation of L1 by third demographic</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="guide-section">
+                        <h5><i class="fas fa-file-excel me-2"></i>Input Requirements</h5>
+                        <ul>
+                            <li>Excel file (.xlsx or .xls)</li>
+                            <li>One row per employee</li>
+                            <li>L2 Classification column with format: <code>L1 | L2</code> (e.g., "Doers | Dev/ Eng")</li>
+                            <li>At least 3 demographic columns for analysis</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="guide-section">
+                        <h5><i class="fas fa-exclamation-triangle me-2"></i>Anomaly Handling</h5>
+                        <p>The tool will flag rows with:</p>
+                        <ul>
+                            <li>Missing L1/L2 classification</li>
+                            <li>Invalid format (missing "|" separator)</li>
+                            <li>Unrecognized L1 category</li>
+                        </ul>
+                        <p>Flagged rows are auto-categorized as "Unknown | Unknown". You can override these during review.</p>
+                    </div>
+                    
+                    <div class="guide-section">
+                        <h5><i class="fas fa-palette me-2"></i>Output Formatting</h5>
+                        <ul>
+                            <li>All cuts on single sheet with clean block layout</li>
+                            <li>Category names in grey italic (Cuts 1-3)</li>
+                            <li>Descending sort order (blanks at end)</li>
+                            <li>No merged cells (think-cell compatible)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

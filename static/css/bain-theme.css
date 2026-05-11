@@ -1,0 +1,346 @@
+/**
+ * TDW Cuts Automation Tool - Bain Theme
+ * Professional styling with Bain brand colors
+ */
+
+:root {
+    --bain-red: #CC0000;
+    --bain-red-dark: #990000;
+    --bain-dark-grey: #333333;
+    --bain-medium-grey: #808080;
+    --bain-light-grey: #F5F5F5;
+    --bain-white: #FFFFFF;
+    --bain-border-grey: #E0E0E0;
+}
+
+/* General Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bain-light-grey);
+    color: var(--bain-dark-grey);
+}
+
+/* Wrapper */
+.wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+}
+
+/* Sidebar */
+#sidebar {
+    min-width: 250px;
+    max-width: 250px;
+    background: var(--bain-white);
+    color: var(--bain-dark-grey);
+    transition: all 0.3s;
+    border-right: 1px solid var(--bain-border-grey);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+#sidebar.active {
+    margin-left: -250px;
+}
+
+.sidebar-header {
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid var(--bain-border-grey);
+}
+
+.logo-img {
+    max-width: 120px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+#sidebar ul.components {
+    padding: 20px 0;
+    flex-grow: 1;
+}
+
+#sidebar ul li {
+    padding: 0;
+}
+
+#sidebar ul li a {
+    padding: 12px 20px;
+    font-size: 14px;
+    display: block;
+    color: var(--bain-dark-grey);
+    text-decoration: none;
+    transition: all 0.2s;
+    border-left: 3px solid transparent;
+}
+
+#sidebar ul li a:hover {
+    background: var(--bain-light-grey);
+    border-left-color: var(--bain-red);
+}
+
+#sidebar ul li.active a {
+    background: var(--bain-light-grey);
+    border-left-color: var(--bain-red);
+    font-weight: 600;
+}
+
+#sidebar ul li a i {
+    margin-right: 10px;
+    width: 20px;
+    text-align: center;
+}
+
+/* Content */
+#content {
+    width: 100%;
+    padding: 0;
+    min-height: 100vh;
+    transition: all 0.3s;
+}
+
+/* Navbar */
+.navbar {
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--bain-border-grey);
+}
+
+.navbar-brand {
+    font-weight: 600;
+    color: var(--bain-dark-grey);
+}
+
+/* Buttons */
+.btn-bain {
+    background-color: var(--bain-red);
+    border-color: var(--bain-red);
+    color: white;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.btn-bain:hover {
+    background-color: var(--bain-red-dark);
+    border-color: var(--bain-red-dark);
+    color: white;
+}
+
+.text-bain {
+    color: var(--bain-red);
+}
+
+.bg-bain {
+    background-color: var(--bain-red);
+}
+
+/* Cards */
+.card {
+    border: 1px solid var(--bain-border-grey);
+    border-radius: 4px;
+    background: white;
+}
+
+.card-header {
+    border-bottom: 1px solid var(--bain-border-grey);
+    padding: 15px 20px;
+}
+
+/* Landing Page */
+.landing-page .hero-section {
+    background: white;
+    border-bottom: 1px solid var(--bain-border-grey);
+}
+
+.red-accent-bar {
+    height: 4px;
+    width: 60px;
+    background: var(--bain-red);
+    margin: 0 auto;
+}
+
+.feature-card {
+    background: white;
+    border: 1px solid var(--bain-border-grey);
+    border-radius: 4px;
+    padding: 30px;
+    text-align: center;
+    transition: all 0.2s;
+}
+
+.feature-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transform: translateY(-2px);
+}
+
+.feature-icon {
+    font-size: 40px;
+    color: var(--bain-red);
+    margin-bottom: 15px;
+}
+
+.stat-number {
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--bain-red);
+}
+
+.stat-label {
+    color: var(--bain-medium-grey);
+    font-size: 14px;
+}
+
+/* Upload Area */
+.upload-area {
+    border: 2px dashed var(--bain-border-grey);
+    border-radius: 8px;
+    background: var(--bain-light-grey);
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.upload-area:hover,
+.upload-area.dragover {
+    border-color: var(--bain-red);
+    background: #FFF5F5;
+}
+
+.upload-area.has-file {
+    border-color: #28a745;
+    background: #F5FFF5;
+}
+
+/* Form Styling */
+.form-select,
+.form-control {
+    border: 1px solid var(--bain-border-grey);
+    border-radius: 4px;
+}
+
+.form-select:focus,
+.form-control:focus {
+    border-color: var(--bain-red);
+    box-shadow: 0 0 0 0.2rem rgba(204, 0, 0, 0.25);
+}
+
+.mapping-field {
+    background: var(--bain-light-grey);
+    padding: 15px;
+    border-radius: 4px;
+    border: 1px solid var(--bain-border-grey);
+}
+
+/* Table Styling */
+.table thead th {
+    background-color: var(--bain-dark-grey);
+    color: white;
+    font-weight: 600;
+    border: none;
+}
+
+.table tbody td {
+    border-bottom: 1px solid var(--bain-border-grey);
+}
+
+/* Cut Preview Cards */
+.cuts-preview {
+    margin-top: 20px;
+}
+
+.cut-preview-card {
+    background: white;
+    border: 1px solid var(--bain-border-grey);
+    border-radius: 4px;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+.cut-header {
+    padding: 12px 15px;
+    background: var(--bain-light-grey);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: all 0.2s;
+}
+
+.cut-header:hover {
+    background: #E8E8E8;
+}
+
+.cut-number {
+    background: var(--bain-red);
+    color: white;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+    margin-right: 12px;
+}
+
+.cut-title {
+    font-weight: 600;
+}
+
+.cut-body {
+    padding: 15px;
+}
+
+/* Processing Animation */
+.processing-animation {
+    color: var(--bain-red);
+}
+
+/* Alerts */
+.alert-info {
+    background-color: #F0F8FF;
+    border-color: #B8D4E8;
+    color: var(--bain-dark-grey);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    #sidebar {
+        margin-left: -250px;
+    }
+    #sidebar.active {
+        margin-left: 0;
+    }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bain-light-grey);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--bain-medium-grey);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--bain-dark-grey);
+}
+
+/* Guide */
+.guide-section {
+    margin-bottom: 30px;
+}
+
+.guide-section h5 {
+    color: var(--bain-red);
+    margin-bottom: 15px;
+}
+
+/* Font Italic for Categories */
+.font-italic {
+    font-style: italic;
+}

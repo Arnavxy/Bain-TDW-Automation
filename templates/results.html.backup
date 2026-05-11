@@ -1,0 +1,305 @@
+{% extends "base.html" %}
+
+{% block title %}Results - {{ app_name }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <!-- Success Header -->
+            <div class="text-center mb-4">
+                <i class="fas fa-check-circle fa-3x text-success mb-3"></i>
+                <h3>Your TDW Cuts Are Ready!</h3>
+                <p class="text-muted">All 8 cuts have been generated and formatted for think-cell.</p>
+            </div>
+            
+            <!-- Download Button -->
+            <div class="text-center mb-5">
+                <a href="{{ url_for('download') }}" class="btn btn-bain btn-lg px-5">
+                    <i class="fas fa-download me-2"></i>Download Excel File
+                </a>
+                <a href="{{ url_for('new_analysis') }}" class="btn btn-outline-secondary btn-lg ms-2">
+                    <i class="fas fa-redo me-2"></i>New Analysis
+                </a>
+            </div>
+            
+            <!-- Cuts Preview -->
+            <div class="cuts-preview">
+                <h5 class="mb-3"><i class="fas fa-eye me-2"></i>Preview</h5>
+                
+                <!-- Cut 1 -->
+                <div class="cut-preview-card">
+                    <div class="cut-header" data-bs-toggle="collapse" data-bs-target="#cut1">
+                        <span class="cut-number">1</span>
+                        <span class="cut-title">{{ cuts.cut1.title }}</span>
+                        <i class="fas fa-chevron-down ms-auto"></i>
+                    </div>
+                    <div class="collapse show" id="cut1">
+                        <div class="cut-body">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>{{ cuts.cut1.column_name }}</th>
+                                        <th class="text-end">Count</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for i in range(cuts.cut1.categories|length) %}{% set cat = cuts.cut1.categories[i] %}{% set val = cuts.cut1.values[i] %}
+                                    <tr>
+                                        <td class="text-muted font-italic">{{ cat }}</td>
+                                        <td class="text-end">{{ val }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                    <tr class="table-active fw-bold">
+                                        <td>Total</td>
+                                        <td class="text-end">{{ cuts.cut1.total }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Cut 2 -->
+                <div class="cut-preview-card">
+                    <div class="cut-header" data-bs-toggle="collapse" data-bs-target="#cut2">
+                        <span class="cut-number">2</span>
+                        <span class="cut-title">{{ cuts.cut2.title }}</span>
+                        <i class="fas fa-chevron-down ms-auto"></i>
+                    </div>
+                    <div class="collapse" id="cut2">
+                        <div class="cut-body">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>{{ cuts.cut2.column_name }}</th>
+                                        <th class="text-end">Count</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for i in range(cuts.cut2.categories|length) %}{% set cat = cuts.cut2.categories[i] %}{% set val = cuts.cut2.values[i] %}
+                                    <tr>
+                                        <td class="text-muted font-italic">{{ cat }}</td>
+                                        <td class="text-end">{{ val }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                    <tr class="table-active fw-bold">
+                                        <td>Total</td>
+                                        <td class="text-end">{{ cuts.cut2.total }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Cut 3 -->
+                <div class="cut-preview-card">
+                    <div class="cut-header" data-bs-toggle="collapse" data-bs-target="#cut3">
+                        <span class="cut-number">3</span>
+                        <span class="cut-title">{{ cuts.cut3.title }}</span>
+                        <i class="fas fa-chevron-down ms-auto"></i>
+                    </div>
+                    <div class="collapse" id="cut3">
+                        <div class="cut-body">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>{{ cuts.cut3.column_name }}</th>
+                                        <th class="text-end">Count</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for i in range(cuts.cut3.categories|length) %}{% set cat = cuts.cut3.categories[i] %}{% set val = cuts.cut3.values[i] %}
+                                    <tr>
+                                        <td class="text-muted font-italic">{{ cat }}</td>
+                                        <td class="text-end">{{ val }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                    <tr class="table-active fw-bold">
+                                        <td>Total</td>
+                                        <td class="text-end">{{ cuts.cut3.total }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Cut 4: L1 Split -->
+                <div class="cut-preview-card">
+                    <div class="cut-header" data-bs-toggle="collapse" data-bs-target="#cut4">
+                        <span class="cut-number">4</span>
+                        <span class="cut-title">{{ cuts.cut4.title }}</span>
+                        <i class="fas fa-chevron-down ms-auto"></i>
+                    </div>
+                    <div class="collapse" id="cut4">
+                        <div class="cut-body">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>L1 Category</th>
+                                        <th class="text-end">Count</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for i in range(cuts.cut4.categories|length) %}{% set cat = cuts.cut4.categories[i] %}{% set val = cuts.cut4.values[i] %}
+                                    <tr>
+                                        <td>{{ cat }}</td>
+                                        <td class="text-end">{{ val }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                    <tr class="table-active fw-bold">
+                                        <td>Total</td>
+                                        <td class="text-end">{{ cuts.cut4.total }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Cut 5: L2 vs L1 -->
+                <div class="cut-preview-card">
+                    <div class="cut-header" data-bs-toggle="collapse" data-bs-target="#cut5">
+                        <span class="cut-number">5</span>
+                        <span class="cut-title">{{ cuts.cut5.title }}</span>
+                        <i class="fas fa-chevron-down ms-auto"></i>
+                    </div>
+                    <div class="collapse" id="cut5">
+                        <div class="cut-body">
+                            <div class="table-responsive">
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>L2 Category</th>
+                                            {% for col in cuts.cut5.columns %}
+                                            <th class="text-center">{{ col }}</th>
+                                            {% endfor %}
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for i in range(cuts.cut5.rows|length) %}{% set row_name = cuts.cut5.rows[i] %}{% set row_data = cuts.cut5.data[i] %}
+                                        <tr>
+                                            <td>{{ row_name }}</td>
+                                            {% for val in row_data %}
+                                            <td class="text-center">{{ val }}</td>
+                                            {% endfor %}
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Cut 6: L1 vs Demo 1 -->
+                <div class="cut-preview-card">
+                    <div class="cut-header" data-bs-toggle="collapse" data-bs-target="#cut6">
+                        <span class="cut-number">6</span>
+                        <span class="cut-title">{{ cuts.cut6.title }}</span>
+                        <i class="fas fa-chevron-down ms-auto"></i>
+                    </div>
+                    <div class="collapse" id="cut6">
+                        <div class="cut-body">
+                            <div class="table-responsive">
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>L1 \ {{ cuts.cut6.title.split('vs ')[1] }}</th>
+                                            {% for col in cuts.cut6.columns %}
+                                            <th class="text-center">{{ col }}</th>
+                                            {% endfor %}
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for i in range(cuts.cut6.rows|length) %}{% set row_name = cuts.cut6.rows[i] %}{% set row_data = cuts.cut6.data[i] %}
+                                        <tr>
+                                            <td>{{ row_name }}</td>
+                                            {% for val in row_data %}
+                                            <td class="text-center">{{ val }}</td>
+                                            {% endfor %}
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Cut 7: L1 vs Demo 2 -->
+                <div class="cut-preview-card">
+                    <div class="cut-header" data-bs-toggle="collapse" data-bs-target="#cut7">
+                        <span class="cut-number">7</span>
+                        <span class="cut-title">{{ cuts.cut7.title }}</span>
+                        <i class="fas fa-chevron-down ms-auto"></i>
+                    </div>
+                    <div class="collapse" id="cut7">
+                        <div class="cut-body">
+                            <div class="table-responsive">
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>L1 \ {{ cuts.cut7.title.split('vs ')[1] }}</th>
+                                            {% for col in cuts.cut7.columns %}
+                                            <th class="text-center">{{ col }}</th>
+                                            {% endfor %}
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for i in range(cuts.cut7.rows|length) %}{% set row_name = cuts.cut7.rows[i] %}{% set row_data = cuts.cut7.data[i] %}
+                                        <tr>
+                                            <td>{{ row_name }}</td>
+                                            {% for val in row_data %}
+                                            <td class="text-center">{{ val }}</td>
+                                            {% endfor %}
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Cut 8: L1 vs Demo 3 -->
+                <div class="cut-preview-card">
+                    <div class="cut-header" data-bs-toggle="collapse" data-bs-target="#cut8">
+                        <span class="cut-number">8</span>
+                        <span class="cut-title">{{ cuts.cut8.title }}</span>
+                        <i class="fas fa-chevron-down ms-auto"></i>
+                    </div>
+                    <div class="collapse" id="cut8">
+                        <div class="cut-body">
+                            <div class="table-responsive">
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>L1 \ {{ cuts.cut8.title.split('vs ')[1] }}</th>
+                                            {% for col in cuts.cut8.columns %}
+                                            <th class="text-center">{{ col }}</th>
+                                            {% endfor %}
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for i in range(cuts.cut8.rows|length) %}{% set row_name = cuts.cut8.rows[i] %}{% set row_data = cuts.cut8.data[i] %}
+                                        <tr>
+                                            <td>{{ row_name }}</td>
+                                            {% for val in row_data %}
+                                            <td class="text-center">{{ val }}</td>
+                                            {% endfor %}
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block title %}Column Mapping - {{ app_name }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-white">
+                    <h4 class="mb-0">
+                        <i class="fas fa-columns me-2"></i>Map Your Columns
+                    </h4>
+                </div>
+                <div class="card-body p-4">
+                    <p class="text-muted mb-4">Select the columns for your TDW analysis. The tool will automatically extract L1/L2 from your classification column.</p>
+                    
+                    <form action="{{ url_for('mapping') }}" method="post">
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <div class="mapping-field">
+                                    <label class="form-label fw-bold">
+                                        <i class="fas fa-tag me-2"></i>L2 Classification Column
+                                    </label>
+                                    <select name="l2_column" class="form-select" required>
+                                        <option value="" disabled selected>Select column...</option>
+                                        {% for col in columns %}
+                                        <option value="{{ col }}" {% if col == 'L2 Classification' %}selected{% endif %}>{{ col }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <small class="text-muted">This column should contain values like "Doers | Dev/ Eng"</small>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-4">
+                                <div class="mapping-field">
+                                    <label class="form-label fw-bold">
+                                        <i class="fas fa-chart-bar me-2"></i>Demographic 1
+                                    </label>
+                                    <select name="demo1" class="form-select" required>
+                                        <option value="" disabled selected>Select...</option>
+                                        {% for col in columns %}
+                                        <option value="{{ col }}" {% if col == 'Management Level' %}selected{% endif %}>{{ col }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-4">
+                                <div class="mapping-field">
+                                    <label class="form-label fw-bold">
+                                        <i class="fas fa-chart-bar me-2"></i>Demographic 2
+                                    </label>
+                                    <select name="demo2" class="form-select" required>
+                                        <option value="" disabled selected>Select...</option>
+                                        {% for col in columns %}
+                                        <option value="{{ col }}" {% if col == 'Sub-Division' %}selected{% endif %}>{{ col }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-4">
+                                <div class="mapping-field">
+                                    <label class="form-label fw-bold">
+                                        <i class="fas fa-chart-bar me-2"></i>Demographic 3
+                                    </label>
+                                    <select name="demo3" class="form-select" required>
+                                        <option value="" disabled selected>Select...</option>
+                                        {% for col in columns %}
+                                        <option value="{{ col }}" {% if col == 'Location Type' %}selected{% endif %}>{{ col }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="alert alert-info mt-4">
+                            <i class="fas fa-info-circle"></i>
+                            <strong>Tip:</strong> Choose demographics with < 10 unique values for best results.
+                        </div>
+                        
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <h6 class="card-title"><i class="fas fa-percentage me-2"></i>Output Options</h6>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" name="include_percentages" id="include_percentages">
+                                    <label class="form-check-label" for="include_percentages">
+                                        Include Percentages
+                                        <small class="text-muted d-block">Add percentage columns to demographic cuts</small>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2 mt-4">
+                            <button type="submit" class="btn btn-bain btn-lg">
+                                <i class="fas fa-arrow-right me-2"></i>Review & Generate
+                            </button>
+                            <a href="{{ url_for('select_sheet') }}" class="btn btn-outline-secondary">
+                                <i class="fas fa-arrow-left me-2"></i>Back
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

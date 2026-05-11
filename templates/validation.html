@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block title %}Validate Data - {{ app_name }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card shadow-sm">
+                <div class="card-header bg-white">
+                    <h4 class="mb-0">
+                        <i class="fas fa-shield-alt me-2"></i>Data Validation
+                    </h4>
+                </div>
+                <div class="card-body p-4">
+                    <p class="text-muted mb-4">We found some issues with your data. Review them below and choose how to handle each one.</p>
+                    
+                    <form action="{{ url_for('validation') }}" method="post">
+                        
+                        {% if errors %}
+                        <div class="alert alert-danger">
+                            <h5><i class="fas fa-times-circle"></i> Errors (Must Fix)</h5>
+                            <ul class="mb-0">
+                                {% for error in errors %}
+                                <li>{{ error.message }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        {% endif %}
+                        
+                        {% if warnings %}
+                        <div class="validation-issues">
+                            <h5 class="mb-3"><i class="fas fa-exclamation-triangle text-warning"></i> Warnings & Suggestions</h5>
+                            
+                            {% for issue in warnings %}
+                            <div class="issue-card mb-3">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <span class="badge bg-{% if issue.type == 'warning' %}warning text-dark{% else %}info{% endif %} mb-2">
+                                            {{ issue.type|title }}
+                                        </span>
+                                        <p class="mb-1">{{ issue.message }}</p>
+                                        {% if issue.details %}
+                                        <small class="text-muted">Details: {{ issue.details|join(', ') }}</small>
+                                        {% endif %}
+                                    </div>
+                                    <div class="ms-3">
+                                        {% if issue.auto_fixable %}
+                                        <div class="btn-group">
+                                            <input type="radio" class="btn-check" name="fix_{{ loop.index }}" id="ignore_{{ loop.index }}" value="ignore" checked>
+                                            <label class="btn btn-outline-secondary btn-sm" for="ignore_{{ loop.index }}">Ignore</label>
+                                            
+                                            <input type="radio" class="btn-check" name="fix_{{ loop.index }}" id="fix_{{ loop.index }}" value="{{ issue.fix_action }}">
+                                            <label class="btn btn-outline-primary btn-sm" for="fix_{{ loop.index }}">Auto-Fix</label>
+                                        </div>
+                                        {% else %}
+                                        <span class="badge bg-secondary">Manual Fix Required</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                        
+                        {% if not errors and not warnings %}
+                        <div class="text-center py-5">
+                            <i class="fas fa-check-circle fa-3x text-success mb-3"></i>
+                            <h5>Data Looks Good!</h5>
+                            <p class="text-muted">No issues detected. Ready to proceed.</p>
+                        </div>
+                        {% endif %}
+                        
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                            {% if not errors %}
+                            <button type="submit" class="btn btn-bain">
+                                <i class="fas fa-arrow-right me-2"></i>Proceed
+                            </button>
+                            {% endif %}
+                            <a href="{{ url_for('upload') }}" class="btn btn-outline-secondary">
+                                <i class="fas fa-arrow-left me-2"></i>Upload Different File
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
