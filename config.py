@@ -49,4 +49,5 @@ UPLOAD_FOLDER = 'uploads'
 # App settings
 APP_NAME = 'TDW Cuts Automation Tool'
 APP_VERSION = '1.0.0'
-SECRET_KEY = 'tdw-automation-secret-key-2024'
+import os
+SECRET_KEY = os.environ.get('SECRET_KEY', 'tdw-automation-secret-key-2024')
